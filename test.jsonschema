@@ -1,20 +1,200 @@
 {
-  "type": "object",
-  "name": "person",
-  "properties": {
-    "name": {"type": "string"},
-    "age": {"type": "integer", "min": 0, "max": 120},
-    "income": {"type": "number", "min": 0},
-    "universe": {"type": "string", "enum": ["Marvel", "DC"]},
-    "living": {"type": "boolean", "default": true},
-    "alterEgos": {"type": "array", "items": {"type": "string"}},
-    "location": {
-      "type": "object",
-      "properties": {
-        "city": {"type": "string"},
-        "state": {"type": "string", "regex": "/[A-Z]{2}/"}
-      }
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "description": "Object for saving correction data associated with LabTools",
+    "type": "object",
+    "name": "Test",
+    "properties": {
+        "athlete": {
+            "type": "string"
+        },
+        "analysis": {
+            "type": "string"
+        },
+        "correction": {
+            "type": "string"
+        },
+
+        "original_filenames": {
+            "type": "object",
+            "properties": {
+                "sprint": {
+                    "type": "object",
+                    "properties": {
+                        "c2d": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "ramp": {
+                    "type": "object",
+                    "properties": {
+                        "c2d": {
+                            "type": "string"
+                        },
+                        "xml": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "trough": {
+                    "type": "object",
+                    "properties": {
+                        "c2d": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+
+        "location": {
+            "type": "string"
+        },
+        "temperature": {
+            "type": "string"
+        },
+        "date": {
+            "type": "string"
+        },
+        "ergometer_serial_nr": {
+            "type": "string"
+        },
+        "testing_bicycle": {
+            "type": "string"
+        },
+        "gear_ratio": {
+            "type": "string"
+        },
+
+        "sprint": {
+            "type": "object",
+            "properties": {
+                "lactate": {
+                    "type": "object",
+                    "properties": {
+                        "vbla1": {
+                            "type": "number"
+                        },
+                        "vbla2": {
+                            "type": "number"
+                        },
+                        "vbla3": {
+                            "type": "number"
+                        },
+                        "nblamax": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "alactazide": {
+                    "type": "object",
+                    "properties": {
+                        "time": {
+                            "type": "number"
+                        },
+                        "wattage": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "peak": {
+                    "type": "object",
+                    "properties": {
+                        "time": {
+                            "type": "number"
+                        },
+                        "wattage": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "max_force": {
+                    "type": "number"
+                },
+                "end_wattage": {
+                    "type": "number"
+                },
+                "avg_wattage": {
+                    "type": "number"
+                }
+            }
+        },
+
+        "ramp": {
+            "type": "object",
+            "properties": {
+                "vo2": {
+                    "type": "object",
+                    "properties": {
+                        "start": {
+                            "type": "number"
+                        },
+                        "end": {
+                            "type": "number"
+                        },
+                        "excluded": {
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            }
+                        },
+                        "average": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "max_heartfrequency": {
+                    "type": "number"
+                },
+                "max_wattage": {
+                    "type": "number"
+                }
+            }
+        },
+
+        "trough": {
+            "type": "object",
+            "properties": {
+                "starting_wattage": {
+                    "type": "number"
+                },
+                "starting_wattage_epsilon": {
+                    "type": "number"
+                },
+                "lactate": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "IANS": {
+                    "type": "object",
+                    "properties": {
+                        "heartfrequency": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "number"
+                                },
+                                "wattage": {
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        "wattage": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "number"
+                                },
+                                "wattage": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-  },
-  "required": ["name", "age", "income"]
 }

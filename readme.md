@@ -2,6 +2,8 @@
 [![NPM](https://nodei.co/npm/jsonschema-protobuf.png)](https://nodei.co/npm/jsonschema-protobuf/)
 
 Converts [JSON Schema](http://json-schema.org/) to [Protocol Buffers](https://developers.google.com/protocol-buffers).
+roughly converts jsonschemas to proto3. Highly specific fork for personal project. i wouldnt recommend you use this.
+
 
 ## Install
 ```

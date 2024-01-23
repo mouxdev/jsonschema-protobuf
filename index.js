@@ -11,7 +11,7 @@ var mappings = {
 module.exports = function (schema) {
   if (typeof schema === 'string') schema = JSON.parse(schema)
   var result = {
-    syntax: 2,
+    syntax: 3,
     package: null,
     enums: [],
     messages: []
@@ -20,7 +20,11 @@ module.exports = function (schema) {
   if (schema.type === 'object') {
     result.messages.push(Message(schema))
   }
-  return protobuf.stringify(result)
+  let str = protobuf.stringify(result)
+  str = str.replaceAll("required ", "")
+  str = str.replaceAll("optional ", "")
+  str = str.replaceAll("int32", "double")
+  return str
 }
 
 function Message (schema) {
