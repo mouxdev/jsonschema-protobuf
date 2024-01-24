@@ -1,10 +1,10 @@
 {
-  "name": "jsonschema-protobuf",
-  "version": "1.0.2",
+  "name": "@moux/jsonschema-protobuf",
+  "version": "1.0.4.1",
   "description": "json-schema.org to proto3 object converter",
   "main": "index.js",
   "bin": {
-    "jsonschema-protobuf": "cli.js"
+    "moux-jsonschema-protobuf": "cli.js"
   },
   "scripts": {
     "test": "node test.js"

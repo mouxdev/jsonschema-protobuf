@@ -24,6 +24,7 @@ module.exports = function (schema) {
   str = str.replaceAll("required ", "")
   str = str.replaceAll("optional ", "")
   str = str.replaceAll("int32", "double")
+  str = str.replaceAll("number", "double")
   return str
 }
 
