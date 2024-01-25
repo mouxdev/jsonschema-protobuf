@@ -41,7 +41,7 @@ function recursivelyAddMessagesAsFields(message) {
   let counter = message.fields.length + 1;
   for (const m of message.messages) {
     message.fields.push({
-      name: m.name.toLowerCase(),
+      name: m.name.toLowerCase() + "_",
       repeated: false,
       type: m.name,
       tag: counter
