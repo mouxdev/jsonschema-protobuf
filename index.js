@@ -21,16 +21,7 @@ module.exports = function (schema, go_package) {
     result.messages.push(Message(schema))
   }
 
-  let counter = result.messages[0].fields.length + 1;
-  for (const m of result.messages[0].messages) {
-    result.messages[0].fields.push({
-      name: m.name.toLowerCase(),
-      repeated: false,
-      type: m.name,
-      tag: counter
-    });
-    counter = counter + 1;
-  }
+  recursivelyAddMessagesAsFields(result.messages[0])
   let str = protobuf.stringify(result)
   str = str.replaceAll("required ", "")
   str = str.replaceAll("optional ", "")
@@ -39,6 +30,24 @@ module.exports = function (schema, go_package) {
   let index = str.indexOf(";");
   str = str.slice(0, index + 1) + "\noption go_package = \"" + go_package + "\";\n" + str.slice(index + 1)
   return str
+}
+
+function recursivelyAddMessagesAsFields(message) {
+  if (message.messages.length > 0) {
+    for (const rm of message.messages) {
+      recursivelyAddMessagesAsFields(rm)
+    }
+  }
+  let counter = message.fields.length + 1;
+  for (const m of message.messages) {
+    message.fields.push({
+      name: m.name.toLowerCase(),
+      repeated: false,
+      type: m.name,
+      tag: counter
+    });
+    counter = counter + 1;
+  }
 }
 
 function Message (schema) {

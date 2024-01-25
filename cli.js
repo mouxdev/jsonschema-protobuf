@@ -7,4 +7,4 @@ var file = args[0]
 var go_package = args[1]
 var protobuf = convert(fs.readFileSync(file).toString(), go_package)
 process.stdout.write(protobuf)
-console.log(protobuf)
+//console.log(protobuf)

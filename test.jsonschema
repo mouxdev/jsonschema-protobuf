@@ -11,7 +11,12 @@
             "type": "object",
             "properties": {
                 "bmi": {
-                    "type": "number"
+                    "type": "object",
+                    "properties": {
+                        "soos": {
+                            "type": "number"
+                        }
+                    }
                 },
                 "bsa": {
                     "type": "number"
