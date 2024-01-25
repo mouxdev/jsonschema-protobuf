@@ -8,7 +8,7 @@ var mappings = {
   'boolean': 'bool'
 }
 
-module.exports = function (schema) {
+module.exports = function (schema, go_package) {
   if (typeof schema === 'string') schema = JSON.parse(schema)
   var result = {
     syntax: 3,
@@ -25,6 +25,8 @@ module.exports = function (schema) {
   str = str.replaceAll("optional ", "")
   str = str.replaceAll("int32", "double")
   str = str.replaceAll("number", "double")
+  let index = str.indexOf(";");
+  str = str.slice(0, index + 1) + "\noption go_package = \"" + go_package + "\";\n" + str.slice(index + 1)
   return str
 }
 
