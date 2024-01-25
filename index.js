@@ -20,6 +20,17 @@ module.exports = function (schema, go_package) {
   if (schema.type === 'object') {
     result.messages.push(Message(schema))
   }
+
+  let counter = result.messages[0].fields.length + 1;
+  for (const m of result.messages[0].messages) {
+    result.messages[0].fields.push({
+      name: m.name.toLowerCase(),
+      repeated: false,
+      type: m.name,
+      tag: counter
+    });
+    counter = counter + 1;
+  }
   let str = protobuf.stringify(result)
   str = str.replaceAll("required ", "")
   str = str.replaceAll("optional ", "")
