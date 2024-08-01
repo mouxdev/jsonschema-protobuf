@@ -75,6 +75,7 @@ function Message(schema) {
       var [newField, newEnum] = Enum(field, tag, key);
       message.fields.push(newField);
       result.enums.push(newEnum);
+      tag += 1;
     } else {
       field.name = key
       message.fields.push(Field(field, tag))
