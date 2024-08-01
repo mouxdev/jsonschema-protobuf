@@ -6,9 +6,6 @@
   "bin": {
     "moux-jsonschema-protobuf": "cli.js"
   },
-  "scripts": {
-    "test": "node test.js"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/moux/jsonschema-protobuf.git"
@@ -18,9 +15,5 @@
   "bugs": {
     "url": "https://github.com/moux/jsonschema-protobuf/issues"
   },
-  "homepage": "https://github.com/moux/jsonschema-protobuf",
-  "dependencies": {
-    "protocol-buffers-schema": "^2.0.3",
-    "tape": "^4.2.0"
-  }
+  "homepage": "https://github.com/moux/jsonschema-protobuf"
 }

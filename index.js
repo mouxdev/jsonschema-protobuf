@@ -1,4 +1,4 @@
-var protobuf = require('protocol-buffers-schema')
+var stringify = require('./stringify.js')
 var mappings = {
   'array': 'repeated',
   'object': 'message',
@@ -8,9 +8,16 @@ var mappings = {
   'boolean': 'bool'
 }
 
+var result = {
+  syntax: 3,
+  package: null,
+  enums: [],
+  messages: []
+}
+
 module.exports = function (schema, go_package) {
   if (typeof schema === 'string') schema = JSON.parse(schema)
-  var result = {
+  result = {
     syntax: 3,
     package: null,
     enums: [],
@@ -22,7 +29,7 @@ module.exports = function (schema, go_package) {
   }
 
   recursivelyAddMessagesAsFields(result.messages[0])
-  let str = protobuf.stringify(result)
+  let str = stringify(result)
   str = str.replaceAll("required ", "")
   str = str.replaceAll("optional ", "")
   str = str.replaceAll("int32", "double")
@@ -50,7 +57,7 @@ function recursivelyAddMessagesAsFields(message) {
   }
 }
 
-function Message (schema) {
+function Message(schema) {
   var message = {
     name: schema.name,
     enums: [],
@@ -64,6 +71,10 @@ function Message (schema) {
     if (field.type === 'object') {
       field.name = key
       message.messages.push(Message(field))
+    } else if (field.enum) {
+      var [newField, newEnum] = Enum(field, tag, key);
+      message.fields.push(newField);
+      result.enums.push(newEnum);
     } else {
       field.name = key
       message.fields.push(Field(field, tag))
@@ -82,7 +93,22 @@ function Message (schema) {
   return message
 }
 
-function Field (field, tag) {
+function Enum(field, tag, key) {
+  var type = key
+  return [
+    {
+      name: key,
+      type: capitalizeFirstLetter(key),
+      tag: tag
+    },
+    {
+      name: capitalizeFirstLetter(key),
+      values: field.enum
+    }
+  ]
+}
+
+function Field(field, tag) {
   var type = mappings[field.type] || field.type
   var repeated = false
 
@@ -97,4 +123,8 @@ function Field (field, tag) {
     tag: tag,
     repeated: repeated
   }
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
