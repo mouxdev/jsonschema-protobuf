@@ -115,7 +115,14 @@ function Field(field, tag) {
 
   if (field.type === 'array') {
     repeated = true
-    type = field.items.type
+    if (field.items.type === 'object') {
+      var msgArrItem = Message(field.items)
+      msgArrItem.name = field.name + "Item"
+      result.messages.push(msgArrItem)
+      type = field.name + "Item"
+    } else {
+      type = field.items.type
+    }
   }
 
   return {
