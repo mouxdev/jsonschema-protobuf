@@ -4,42 +4,15 @@
     "type": "object",
     "name": "Athlete",
     "properties": {
-        "ltid": {
-            "type": "string"
+        "tester": {
+            "type": "object",
+            "properties": {
+                "hi": {
+                    "type": "number"
+                }
+            }
         },
-        "name_given": {
-            "type": "string"
-        },
-        "name_family": {
-            "type": "string"
-        },
-        "email": {
-            "type": "string"
-        },
-        "country_code": {
-            "type": "string"
-        },
-        "phone": {
-            "type": "string"
-        },
-        "street": {
-            "type": "string"
-        },
-        "city": {
-            "type": "string"
-        },
-        "zip": {
-            "type": "string"
-        },
-        "country": {
-            "type": "string"
-        },
-        "birthdate": {
-            "type": "string"
-        },
-        "gender": {
-            "type": "string"
-        },
+        
         "discipline": {
             "type": "string",
             "enum": ["racing", "mtb-xco", "mtb-dh", "triathlon", "cross", "gravel", "other"]
