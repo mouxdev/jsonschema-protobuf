@@ -45,8 +45,10 @@ function recursivelyAddMessagesAsFields(message) {
       recursivelyAddMessagesAsFields(rm)
     }
   }
+  if (message.DontAddAsField) { return }
   let counter = message.fields.length + 1;
   for (const m of message.messages) {
+    if (m.DontAddAsField) { continue }
     message.fields.push({
       name: m.name.toLowerCase() + "_",
       repeated: false,
@@ -71,6 +73,14 @@ function Message(schema) {
     if (field.type === 'object') {
       field.name = key
       message.messages.push(Message(field))
+    } else if (field.type === 'array'){
+      field.name = key
+      res = Arr(field, tag)
+      message.fields.push(res.field)
+      if (res.message) {
+        message.messages.push(res.message)
+      }
+      tag += 1
     } else if (field.enum) {
       var [newField, newEnum] = Enum(field, tag, key);
       message.fields.push(newField);
@@ -113,17 +123,35 @@ function Field(field, tag) {
   var type = mappings[field.type] || field.type
   var repeated = false
 
-  if (field.type === 'array') {
-    repeated = true
-
-    type = field.items.type
-  }
-
   return {
     name: field.name,
     type: type,
     tag: tag,
     repeated: repeated
+  }
+}
+
+function Arr(field, tag) {
+  var message, type
+  var itemName = field.name + "Item"
+
+  if (field.items.type == 'object') {
+    field.items.name = itemName
+    message = Message(field.items)
+    message.DontAddAsField = true
+    type = itemName
+  } else {
+    type = field.items.type
+  }
+
+  return {
+    message: message,
+    field: {
+      name: field.name,
+      type: type,
+      tag: tag,
+      repeated: true
+    }
   }
 }
 

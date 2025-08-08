@@ -1,44 +1,100 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "description": "Object for saving athlete data associated with LabTools",
-    "type": "object",
-    "name": "Athlete",
-    "properties": {
-        "tester": {
-            "type": "object",
-            "properties": {
-                "hi": {
-                    "type": "number"
-                }
-            }
-        },
-        
-        "discipline": {
-            "type": "string",
-            "enum": ["racing", "mtb-xco", "mtb-dh", "triathlon", "cross", "gravel", "other"]
-        },
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "Object for saving correction data associated with LabTools",
+  "type": "object",
+  "name": "FieldTest",
+  "properties": {
+    "ltid": {
+      "type": "string"
+    },
+    "athlete": {
+      "type": "string"
+    },
+    "field_analysis": {
+      "type": "string"
+    },
 
-        "notes": {
-            "type": "string"
-        },
-        
-        "tests": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
-        },
-
-        "soos": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "test": {
-                        "type": "number"
-                    }
-                }
-            }
+    "activityFiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "originalFilename": { "type": "string" },
+          "id": { "type": "string" }
         }
+      }
+    },
+
+    "research_release": {
+      "type": "boolean"
+    },
+    "weight": {
+      "type": "number"
+    },
+    "height": {
+      "type": "number"
+    },
+    "location": {
+      "type": "string"
+    },
+    "temperature": {
+      "type": "number"
+    },
+    "date": {
+      "type": "string"
+    },
+    "powermeter": {
+      "type": "string"
+    },
+
+    "cp_regression": {
+      "type": "object",
+      "properties": {
+        "cp10s": {
+          "type": "number"
+        },
+        "cp30s": {
+          "type": "number"
+        },
+        "cp3": {
+          "type": "number"
+        },
+        "cp5": {
+          "type": "number"
+        },
+        "cp10": {
+          "type": "number"
+        },
+        "corrections": {
+          "type": "object",
+          "properties": {
+            "cp10s": {
+              "type": "number"
+            },
+            "cp30s": {
+              "type": "number"
+            },
+            "cp3": {
+              "type": "number"
+            },
+            "cp5": {
+              "type": "number"
+            },
+            "cp10": {
+              "type": "number"
+            }
+          }
+        },
+        "slope": {
+          "type": "number"
+        },
+        "determination": {
+          "type": "number"
+        },
+        "w_prime": {
+          "type": "number"
+        }
+      }
     }
+  }
 }
