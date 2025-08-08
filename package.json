@@ -1,6 +1,6 @@
 {
   "name": "@moux/jsonschema-protobuf",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "json-schema.org to proto3 object converter",
   "main": "index.js",
   "bin": {
